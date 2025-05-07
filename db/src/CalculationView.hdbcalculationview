@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CalculationView" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="true" application="BAS" mdsCubeConversionExecution="AT_LOADING_TIME">
+<descriptions defaultDescription="CalculationView"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="com.sap::EMPLOYEE">
+    <resourceUri>com.sap::EMPLOYEE</resourceUri>
+  </DataSource>
+  <DataSource id="com.sap::PRODPLACE">
+    <resourceUri>com.sap::PRODPLACE</resourceUri>
+  </DataSource>
+  <DataSource id="com.sap::PRODMEMBER">
+    <resourceUri>com.sap::PRODMEMBER</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_1" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="S_NO"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="AGE" aggregationType="sum"/>
+      <viewAttribute id="SALARY" aggregationType="sum"/>
+      <viewAttribute id="DEPARTMENT"/>
+      <viewAttribute id="PLACE"/>
+      <viewAttribute id="PRODUCT"/>
+      <viewAttribute hidden="true" id="JOIN$S_NO$S_NO"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="com.sap::EMPLOYEE">
+      <mapping xsi:type="Calculation:AttributeMapping" target="S_NO" source="S_NO"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="AGE" source="AGE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALARY" source="SALARY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENT" source="DEPARTMENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$S_NO$S_NO" source="S_NO"/>
+    </input>
+  
+    <input node="com.sap::PRODPLACE">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PLACE" source="PLACE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT" source="PRODUCT"/>
+  
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$S_NO$S_NO" source="S_NO"/>
+  
+    </input>
+    <joinAttribute name="JOIN$S_NO$S_NO"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="S_NO"/>
+      <viewAttribute id="PRODUCT_ID"/>
+      <viewAttribute id="MEMBER_ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="com.sap::PRODMEMBER"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2" cardinality="CN_1" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="S_NO"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="AGE" aggregationType="sum"/>
+      <viewAttribute id="SALARY" aggregationType="sum"/>
+      <viewAttribute id="DEPARTMENT"/>
+      <viewAttribute id="PLACE"/>
+      <viewAttribute id="PRODUCT"/>
+    
+      <viewAttribute id="PRODUCT_ID"/>
+      <viewAttribute id="MEMBER_ID"/>
+      <viewAttribute hidden="true" id="JOIN$S_NO$S_NO"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Join_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="S_NO" source="S_NO"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="AGE" source="AGE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALARY" source="SALARY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENT" source="DEPARTMENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PLACE" source="PLACE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT" source="PRODUCT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$S_NO$S_NO" source="S_NO"/>
+    </input>
+  
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_ID" source="PRODUCT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MEMBER_ID" source="MEMBER_ID"/>
+  
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$S_NO$S_NO" source="S_NO"/>
+  
+    </input>
+    <joinAttribute name="JOIN$S_NO$S_NO"/>
+  </calculationView>
+</calculationViews>
+
+<logicalModel id="Join_2">
+  <attributes>
+    <attribute id="S_NO" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="S_NO"/>
+      <keyMapping columnObjectName="Join_2" columnName="S_NO"/>
+    </attribute>
+    <attribute id="NAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NAME"/>
+      <keyMapping columnObjectName="Join_2" columnName="NAME"/>
+    </attribute>
+    <attribute id="DEPARTMENT" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DEPARTMENT"/>
+      <keyMapping columnObjectName="Join_2" columnName="DEPARTMENT"/>
+    </attribute>
+    <attribute id="PLACE" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PLACE"/>
+      <keyMapping columnObjectName="Join_2" columnName="PLACE"/>
+    </attribute>
+    <attribute id="PRODUCT" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCTS"/>
+      <keyMapping columnObjectName="Join_2" columnName="PRODUCT"/>
+    </attribute>
+  
+    <attribute id="PRODUCT_ID" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT_ID"/>
+  
+      <keyMapping columnObjectName="Join_2" columnName="PRODUCT_ID"/>
+  
+    </attribute>
+    <attribute id="MEMBER_ID" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MEMBER_ID"/>
+      <keyMapping columnObjectName="Join_2" columnName="MEMBER_ID"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="AGE" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="AGE"/>
+      <measureMapping columnObjectName="Join_2" columnName="AGE"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="SALARY" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="SALARY"/>
+      <measureMapping columnObjectName="Join_2" columnName="SALARY"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="221.11302679000914" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+    
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92.00000000000001" y="376.9999988079071"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape modelObjectName="com.sap::EMPLOYEE" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="187"/>
+    </shape>
+  
+    <shape modelObjectName="com.sap::PRODPLACE" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="196"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302.00000000000006" y="376.9999988079071"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="221.11302679000914" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="16" y="16"/>
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="240" y="48"/>
+      <rectangleSize width="157"/>
+    </shape></shapes>
+</layout>
+</Calculation:scenario>
