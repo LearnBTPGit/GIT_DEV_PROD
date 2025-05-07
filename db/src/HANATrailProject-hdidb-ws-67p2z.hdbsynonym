@@ -1,0 +1,20 @@
+{
+  "com.sap::EMPLOYEE": {
+    "target": {
+      "object": "EMPLOYEE",
+      "schema": "SFLIGHT"
+    }
+  },
+  "com.sap::PRODPLACE": {
+    "target": {
+      "object": "PRODPLACE",
+      "schema": "SFLIGHT"
+    }
+  },
+  "com.sap::PRODMEMBER": {
+    "target": {
+      "object": "PRODMEMBER",
+      "schema": "SFLIGHT"
+    }
+  }
+}
