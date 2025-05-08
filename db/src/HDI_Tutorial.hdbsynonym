@@ -1,0 +1,12 @@
+{
+  "EMPLOYEE1": {
+    "target": {
+      "object": "EMPLOYEE"
+    }
+  },
+  "EMPLOYEE2": {
+    "target": {
+      "object": "EMPLOYEE"
+    }
+  }
+}
